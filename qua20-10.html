@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="darkreader-lock">
+<title>Chúc mừng 20/10 – Quà tặng các bạn nữ</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: only light; --rose:#b9476a; --ink:#5a3345; --soft:#85606f; }
+  * { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; color-scheme: only light; }
+  body {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif; color: var(--ink); line-height: 1.7;
+    background-color: #fde8ee;
+    background-image:
+      radial-gradient(60rem 40rem at 5% -5%, #e9defa, transparent 60%),
+      radial-gradient(50rem 40rem at 100% 15%, #ffe3d3, transparent 60%),
+      radial-gradient(60rem 50rem at 50% 110%, #fbd5e0, transparent 60%);
+    background-attachment: fixed; overflow-x: hidden;
+  }
+  #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+  .bg { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .bg-petal { position: absolute; top: -30px; width: var(--s); height: calc(var(--s) * 1.3); border-radius: 80% 0 80% 0; background: linear-gradient(135deg,#fff,#f7b6c8); opacity: .6; animation: drift var(--d) linear var(--delay) infinite; }
+  @keyframes drift { to { transform: translate3d(var(--x), 108vh, 0) rotate(480deg); } }
+  main, footer { position: relative; z-index: 1; }
+
+  .hero { min-height: 92svh; display: grid; place-items: center; text-align: center; padding: 3rem 1.4rem; }
+  .date { font-family: "Playfair Display", serif; font-size: clamp(5.5rem, 24vw, 12rem); font-weight: 700; line-height: 1; background: linear-gradient(120deg,#f2a0b6,#c77ad0 55%,#f0a98a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1, h2 { font-family: "Playfair Display", serif; font-weight: 500; color: var(--rose); line-height: 1.25; }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.7rem); margin-top: .4rem; }
+  h2 { font-size: clamp(1.6rem, 4.5vw, 2.3rem); text-align: center; font-style: italic; margin-bottom: 1.8rem; }
+  .lead { margin: 1.2rem auto 2rem; max-width: 30rem; color: var(--soft); font-weight: 300; font-size: 1.12rem; }
+
+  .btn { font: inherit; font-weight: 500; border: 0; cursor: pointer; padding: .9rem 2rem; border-radius: 999px; color: #fff; text-decoration: none; display: inline-block;
+    background: linear-gradient(120deg,#e07e98,#c872bc); box-shadow: 0 10px 24px -10px rgba(185,71,106,.6); transition: transform .25s, box-shadow .25s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -10px rgba(185,71,106,.7); }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost { background: #fff; color: var(--rose); border: 1.5px solid #f2b9c9; box-shadow: none; }
+  .btn:focus-visible, .name:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
+
+  section { padding: 3.5rem 1.4rem; }
+  .wrap { max-width: 56rem; margin: 0 auto; }
+
+  .wishes { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .wish { background: rgba(255,255,255,.85); padding: 1.6rem 1.4rem; text-align: center; box-shadow: 0 18px 40px -30px rgba(185,71,106,.6); }
+  .wish:nth-child(odd) { border-radius: 2rem .8rem 2rem .8rem; }
+  .wish:nth-child(even) { border-radius: .8rem 2rem .8rem 2rem; }
+  .wish span { font-size: 1.9rem; display: block; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 2rem; }
+  .chip { padding: .3rem .9rem; border-radius: 999px; background: #fff; border: 1px solid #f2d0db; font-size: .92rem; color: var(--soft); }
+
+  .card { background: #fff; border-radius: 2rem; padding: clamp(1.6rem, 5vw, 2.8rem); box-shadow: 0 24px 60px -34px rgba(185,71,106,.55); border-top: 6px solid #f2a0b6; text-align: center; }
+  .step { display: none; }
+  .step.on { display: block; animation: rise .6s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .pool { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin: 1rem 0 1.6rem; }
+  .pool b { font-weight: 500; padding: .25rem .8rem; border-radius: 999px; background: #fff3f6; color: var(--rose); font-size: .88rem; }
+  .names { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); margin-top: 1rem; }
+  .name { font: inherit; padding: .85rem 1rem; border-radius: 1.1rem; border: 1.5px solid #f2b9c9; background: #fffafc; color: var(--ink); cursor: pointer; transition: transform .2s, background .2s; }
+  .name:hover { background: #fff0f4; transform: translateY(-2px); }
+  .gift { font-size: 6.5rem; line-height: 1; animation: wiggle 1.2s ease-in-out infinite; display: inline-block; }
+  @keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-9deg); } 75% { transform: rotate(9deg); } }
+  .reel { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(2.6rem, 11vw, 4rem); color: var(--rose); margin: .6rem 0; min-height: 1.3em; }
+  .amount { font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(3rem, 14vw, 5rem); line-height: 1.1; background: linear-gradient(120deg,#f2a0b6,#c77ad0 55%,#f0a98a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .label { display: inline-block; padding: .3rem 1.1rem; border-radius: 999px; background: #fff0f4; color: var(--rose); font-weight: 500; margin-bottom: .6rem; }
+  .note { margin-top: 1.4rem; padding: 1rem 1.2rem; border-radius: 1.2rem; background: #f6f0fd; color: var(--ink); font-size: .98rem; }
+  .row { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.4rem; }
+  .msg { color: var(--rose); margin-top: 1rem; min-height: 1.6rem; }
+
+  #admin { display: none; margin-top: 2.5rem; padding: 1.4rem; background: rgba(255,255,255,.9); border-radius: 1.4rem; font-size: .95rem; }
+  #admin table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  #admin td, #admin th { padding: .35rem .5rem; border-bottom: 1px solid #f2d0db; text-align: left; }
+  #admin input, #admin textarea { font: inherit; padding: .5rem .8rem; border: 1.5px solid #f2b9c9; border-radius: .8rem; width: 100%; }
+  footer { text-align: center; padding: 2rem 1.4rem 4rem; color: var(--soft); font-weight: 300; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .bg-petal { display: none; } .gift, .step.on { animation: none; } }
+</style>
+</head>
+<body>
+<div class="bg" id="bg" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<main>
+  <header class="hero">
+    <div>
+      <div class="date" aria-hidden="true">20/10</div>
+      <h1>Chúc mừng ngày Phụ nữ Việt Nam</h1>
+      <p class="lead">Gửi đến 10 bạn nữ xinh đẹp của lớp, kèm một món quà nhỏ đang chờ các bạn mở. 🎁</p>
+      <a class="btn" href="#qua">Nhận quà ngay</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <h2>Lời chúc dành cho các bạn</h2>
+      <div class="wishes">
+        <div class="wish"><span>🌷</span>Chúc các bạn luôn xinh đẹp và rạng rỡ.</div>
+        <div class="wish"><span>🌸</span>Chúc các bạn học thật giỏi, thi thật tốt.</div>
+        <div class="wish"><span>💗</span>Chúc các bạn luôn vui vẻ và hạnh phúc.</div>
+        <div class="wish"><span>🌼</span>Chúc các bạn khỏe mạnh, bình an mỗi ngày.</div>
+        <div class="wish"><span>🦋</span>Chúc mọi ước mơ của các bạn đều thành hiện thực.</div>
+        <div class="wish"><span>🎀</span>Cảm ơn các bạn đã làm lớp mình thêm đáng yêu.</div>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+  </section>
+
+  <section id="qua">
+    <div class="wrap">
+      <h2>Bốc quà 20/10</h2>
+      <div class="card">
+
+        <div class="step on" id="s-pick">
+          <p>Có <strong>10 phần quà</strong> cho 10 bạn, mỗi bạn chỉ được mở <strong>1 lần</strong>. Cơ cấu giải:</p>
+          <div class="pool" id="pool"></div>
+          <p><strong>Bạn hãy chọn đúng tên của mình:</strong></p>
+          <div class="names" id="names"></div>
+          <p class="msg" id="pickMsg" role="status"></p>
+        </div>
+
+        <div class="step" id="s-confirm">
+          <p>Bạn là</p>
+          <h2 style="margin:.4rem 0 .6rem" id="cName"></h2>
+          <p class="sub">Mỗi người chỉ mở quà một lần, bạn nhớ chọn đúng tên nhé.</p>
+          <div class="row">
+            <button class="btn" id="yes" type="button">Đúng, mở quà!</button>
+            <button class="btn ghost" id="no" type="button">Chọn lại</button>
+          </div>
+        </div>
+
+        <div class="step" id="s-spin">
+          <div class="gift">🎁</div>
+          <p>Đang bốc quà cho bạn…</p>
+          <div class="reel" id="reel" aria-live="off"></div>
+        </div>
+
+        <div class="step" id="s-result">
+          <p id="rHello"></p>
+          <div class="label" id="rLabel"></div>
+          <div class="amount" id="rAmount"></div>
+          <p id="rWish" style="margin-top:.8rem"></p>
+          <div class="note" id="rNote"></div>
+          <div class="row"><button class="btn ghost" id="back" type="button">Quay về danh sách</button></div>
+        </div>
+
+      </div>
+
+      <div id="admin">
+        <strong>Khu vực người tổ chức</strong>
+        <div style="display:flex;gap:.6rem;margin-top:.6rem">
+          <input id="pin" type="password" inputmode="numeric" placeholder="Nhập mã PIN">
+          <button class="btn" id="pinBtn" type="button" style="margin:0;padding:.5rem 1.2rem">Mở</button>
+        </div>
+        <div id="adminBody" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><strong style="color:var(--rose)">20/10</strong> · Chúc các bạn nữ lớp mình luôn xinh đẹp và hạnh phúc 🌸</footer>
+
+<script>
+  /* ====== CHỈNH NỘI DUNG Ở ĐÂY ====== */
+  var NAMES = [
+    "Nguyễn Thị Phương Anh", "Hà Nhị Bình", "Vũ Quỳnh Dương", "Phùng Ngọc Hà", "Nguyễn Thị Bích Hồng",
+    "Đinh Thị Hồng Liễu", "Phạm Hồ Khánh Ly", "Đặng Thị Thu Phương", "Chu Quỳnh Trang", "Nguyễn Phương Trang"
+  ];
+  var PRIZES = [100000, 50000, 30000, 20000, 20000, 10000, 10000, 5000, 5000, 5000];
+  var LABEL = { 100000: "Giải Đặc biệt", 50000: "Giải Nhất", 30000: "Giải Nhì", 20000: "Giải Ba", 10000: "Giải Tư", 5000: "Giải Khuyến khích" };
+  var NOTE = "Bạn hãy chụp màn hình kết quả này rồi đưa cho người tổ chức để nhận quà nhé!";
+  var ADMIN_PIN = "2010";   // mã mở khu vực người tổ chức (thêm ?admin sau địa chỉ trang)
+
+  /* Kết quả bốc thăm đã được xáo ngẫu nhiên sẵn và mã hóa (không đọc thẳng được). Đừng sửa. */
+  var DRAW = {"salt":"989afdbc","h":[3027108892600486,5588911138083033,4784309142018513,5183233359152667,3973023350416122,6834275037474217,899164825932487,5146159269161050,1525909351981621,322563139158757]};
+
+  /* ====== CODE ====== */
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fmt = function (v) { return v.toLocaleString("vi-VN") + "đ"; };
+  var STORE = "q2010_me";
+
+  function h53(str, seed) {
+    var h1 = 0xdeadbeef ^ (seed || 0), h2 = 0x41c6ce57 ^ (seed || 0);
+    for (var i = 0, ch; i < str.length; i++) {
+      ch = str.charCodeAt(i);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+  }
+  function keyOf(salt, name, v) { return h53(salt + "|" + name.normalize("NFC") + "|" + v); }
+  var VALUES = PRIZES.filter(function (v, i) { return PRIZES.indexOf(v) === i; });
+  function prizeOf(i) {
+    for (var k = 0; k < VALUES.length; k++) if (keyOf(DRAW.salt, NAMES[i], VALUES[k]) === DRAW.h[i]) return VALUES[k];
+    return null;
+  }
+  function store(v) { try { if (v === undefined) return localStorage.getItem(STORE); if (v === null) localStorage.removeItem(STORE); else localStorage.setItem(STORE, v); } catch (e) {} }
+
+  /* Hiệu ứng nền + hoa giấy */
+  (function () {
+    if (reduce) return;
+    var bg = $("bg");
+    for (var i = 0; i < 14; i++) {
+      var s = document.createElement("span"); s.className = "bg-petal";
+      s.style.left = Math.random() * 100 + "%";
+      s.style.setProperty("--s", 9 + Math.random() * 12 + "px");
+      s.style.setProperty("--d", 11 + Math.random() * 10 + "s");
+      s.style.setProperty("--delay", -Math.random() * 20 + "s");
+      s.style.setProperty("--x", (Math.random() * 140 - 70) + "px");
+      bg.appendChild(s);
+    }
+  })();
+  var cv = $("fx"), cx = cv.getContext("2d"), parts = [], running = false, lastT = 0, EMO = ["🌸","💗","✨","🌷","💖","🎉"];
+  function fit() { var d = Math.min(devicePixelRatio || 1, 2); cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+  fit(); addEventListener("resize", fit);
+  function burst(x, y, n) {
+    if (reduce) return;
+    for (var i = 0; i < n; i++) { var a = Math.random() * 6.283, sp = 3 + Math.random() * 9;
+      parts.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 4, s: 14 + Math.random() * 14, r: 0, vr: (Math.random() - .5) * .25, e: EMO[Math.floor(Math.random() * EMO.length)], life: 0, max: 110 + Math.random() * 70 }); }
+    if (!running) { running = true; lastT = 0; requestAnimationFrame(tick); }
+  }
+  function tick(t) {
+    var dt = lastT ? Math.min((t - lastT) / 16.67, 2.5) : 1; lastT = t;
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    parts = parts.filter(function (p) { return p.life < p.max; });
+    var drag = Math.pow(.985, dt);
+    parts.forEach(function (p) {
+      p.vx *= drag; p.vy = p.vy * drag + .17 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt; p.life += dt;
+      var k = p.life / p.max; cx.save(); cx.globalAlpha = k > .6 ? 1 - (k - .6) / .4 : 1; cx.translate(p.x, p.y); cx.rotate(p.r);
+      cx.font = p.s + "px serif"; cx.fillText(p.e, -p.s / 2, p.s / 2); cx.restore();
+    });
+    if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+
+  /* Danh sách tên + cơ cấu giải */
+  NAMES.forEach(function (n) { var c = document.createElement("span"); c.className = "chip"; c.textContent = n; $("chips").appendChild(c); });
+  var counts = {}; PRIZES.forEach(function (v) { counts[v] = (counts[v] || 0) + 1; });
+  VALUES.forEach(function (v) { var b = document.createElement("b"); b.textContent = counts[v] + " × " + LABEL[v] + ": " + fmt(v); $("pool").appendChild(b); });
+
+  function step(id) {
+    ["pick", "confirm", "spin", "result"].forEach(function (s) { $("s-" + s).classList.toggle("on", s === id); });
+    $("qua").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  var chosen = -1;
+  NAMES.forEach(function (n, i) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "name"; b.textContent = n;
+    b.addEventListener("click", function () {
+      var me = store();
+      if (me !== null && me !== undefined && +me !== i) {
+        $("pickMsg").textContent = "Thiết bị này đã mở quà của " + NAMES[+me] + " rồi nên không mở thay bạn khác được. Bạn hãy dùng điện thoại của mình nhé!"; return;
+      }
+      $("pickMsg").textContent = ""; chosen = i;
+      if (me !== null && me !== undefined && +me === i) { showResult(i, true); return; }
+      $("cName").textContent = n; step("confirm");
+    });
+    $("names").appendChild(b);
+  });
+  $("no").addEventListener("click", function () { step("pick"); });
+  $("back").addEventListener("click", function () { step("pick"); });
+
+  $("yes").addEventListener("click", function () {
+    var v = prizeOf(chosen);
+    if (v === null) { alert("Dữ liệu quà bị lỗi, bạn báo người tổ chức giúp nhé."); return; }
+    store(String(chosen)); step("spin");
+    var n = 0, total = reduce ? 1 : 22, reel = $("reel");
+    (function roll() {
+      n++; reel.textContent = fmt(n >= total ? v : VALUES[Math.floor(Math.random() * VALUES.length)]);
+      if (n >= total) setTimeout(function () { showResult(chosen, false); }, reduce ? 0 : 700);
+      else setTimeout(roll, 60 + n * n * .45);
+    })();
+  });
+
+  function showResult(i, again) {
+    var v = prizeOf(i), first = NAMES[i].split(" ").pop();
+    $("rHello").textContent = again ? "Chào " + first + ", bạn đã mở quà rồi nè:" : "Chúc mừng " + first + "! Bạn nhận được:";
+    $("rLabel").textContent = LABEL[v]; $("rAmount").textContent = fmt(v);
+    $("rWish").textContent = "Chúc " + first + " ngày 20/10 thật vui, thật xinh và thật hạnh phúc! 🌸";
+    $("rNote").textContent = NOTE;
+    step("result");
+    if (!again) setTimeout(function () { burst(innerWidth / 2, innerHeight * .45, 90); burst(innerWidth * .2, innerHeight * .6, 40); burst(innerWidth * .8, innerHeight * .6, 40); }, reduce ? 0 : 300);
+  }
+
+  /* Khu vực người tổ chức: thêm ?admin vào cuối địa chỉ */
+  if (location.search.indexOf("admin") > -1) {
+    $("admin").style.display = "block";
+    $("pinBtn").addEventListener("click", function () {
+      if ($("pin").value !== ADMIN_PIN) { $("pin").value = ""; $("pin").placeholder = "Sai mã, thử lại"; return; }
+      var body = $("adminBody"), rows = "", sum = 0, seen = [];
+      NAMES.forEach(function (n, i) { var v = prizeOf(i); sum += v || 0; seen.push(v);
+        rows += "<tr><td>" + n + "</td><td>" + (v ? LABEL[v] : "LỖI") + "</td><td>" + (v ? fmt(v) : "") + "</td></tr>"; });
+      var ok = seen.slice().sort().join() === PRIZES.slice().sort().join();
+      body.innerHTML = "<table><tr><th>Tên</th><th>Giải</th><th>Tiền</th></tr>" + rows + "</table><p>Tổng tiền: <strong>" + fmt(sum) + "</strong> · " + (ok ? "Đủ 10 phần quà ✓" : "Dữ liệu chưa khớp ✗") + "</p>" +
+        '<div class="row" style="justify-content:flex-start"><button class="btn" id="regen" type="button" style="margin:0">Bốc thăm lại (tạo kết quả mới)</button>' +
+        '<button class="btn ghost" id="unlock" type="button" style="margin:0">Xóa khóa trên máy này</button></div><textarea id="out" rows="4" readonly style="margin-top:1rem;display:none"></textarea>';
+      body.style.display = "block";
+      $("unlock").addEventListener("click", function () { store(null); alert("Đã xóa khóa trên máy này."); });
+      $("regen").addEventListener("click", function () {
+        var pool = PRIZES.slice(), u = new Uint32Array(1);
+        for (var i = pool.length - 1; i > 0; i--) { var lim = 4294967296 - (4294967296 % (i + 1)); do { crypto.getRandomValues(u); } while (u[0] >= lim); var j = u[0] % (i + 1); var t = pool[i]; pool[i] = pool[j]; pool[j] = t; }
+        var salt = Math.random().toString(36).slice(2, 10), h = NAMES.map(function (n, i) { return keyOf(salt, n, pool[i]); });
+        var o = $("out"); o.style.display = "block"; o.value = "var DRAW = " + JSON.stringify({ salt: salt, h: h }) + ";"; o.select();
+      });
+    });
+  }
+</script>
+</body>
+</html>
