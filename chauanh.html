@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="darkreader-lock">
+<title>Một bất ngờ nhỏ dành cho Châu Anh 🎁</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: only light; --rose:#b9476a; --ink:#5a3345; --soft:#85606f; }
+  * { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
+  html { color-scheme: only light; }
+  body {
+    font-family: "Be Vietnam Pro", system-ui, sans-serif; color: var(--ink); line-height: 1.7;
+    background-color: #fde8ee;
+    background-image:
+      radial-gradient(50rem 36rem at 0% 0%, #e9defa, transparent 60%),
+      radial-gradient(46rem 36rem at 100% 20%, #ffe3d3, transparent 60%),
+      radial-gradient(50rem 40rem at 50% 110%, #fbd5e0, transparent 60%);
+    background-attachment: fixed; overflow-x: hidden;
+  }
+  #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; }
+  .dots { position: fixed; top: 1.1rem; left: 0; right: 0; display: flex; justify-content: center; gap: .6rem; z-index: 5; }
+  .dot { width: .7rem; height: .7rem; border-radius: 50%; background: #f5c3d1; transition: transform .3s, background .3s; }
+  .dot.on { background: #d9628a; transform: scale(1.35); }
+  .dot.done { background: #c9a5ee; }
+
+  .stage { min-height: 100svh; display: grid; place-items: center; padding: 4rem 1.4rem 3rem; }
+  .layer { display: none; width: 100%; max-width: 32rem; text-align: center; }
+  .layer.active { display: block; animation: rise .7s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
+
+  h1, h2 { font-family: "Playfair Display", serif; font-weight: 500; color: var(--rose); line-height: 1.25; }
+  h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); }
+  h2 { font-size: clamp(1.5rem, 5vw, 2.1rem); margin-bottom: 1.2rem; }
+  .sub { color: var(--soft); font-weight: 300; margin-top: .6rem; }
+
+  .btn {
+    font: inherit; font-weight: 500; border: 0; cursor: pointer; margin-top: 1.8rem;
+    padding: .9rem 2rem; border-radius: 999px; color: #fff;
+    background: linear-gradient(120deg, #e07e98, #c872bc);
+    box-shadow: 0 10px 24px -10px rgba(185,71,106,.6); transition: transform .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:focus-visible, .opt:focus-visible, .gift:focus-visible { outline: 3px solid var(--rose); outline-offset: 4px; }
+  .hidden { display: none !important; }
+
+  /* Lớp 1: hộp quà */
+  .gift { font-size: clamp(7rem, 32vw, 10rem); line-height: 1; background: none; border: 0; cursor: pointer; margin: 1.2rem 0 .4rem; animation: wiggle 2.2s ease-in-out infinite; }
+  @keyframes wiggle { 0%,60%,100% { transform: rotate(0); } 70% { transform: rotate(-8deg); } 80% { transform: rotate(8deg); } 90% { transform: rotate(-5deg); } }
+  .gift.open { animation: none; transform: scale(1.35); opacity: 0; transition: .6s; }
+
+  /* Lớp 2: câu hỏi */
+  .opts { display: grid; gap: .8rem; margin-top: 1.4rem; }
+  .opt { font: inherit; padding: .95rem 1.2rem; border-radius: 1.2rem; border: 1.5px solid #f2b9c9; background: rgba(255,255,255,.85); color: var(--ink); cursor: pointer; transition: transform .2s, background .2s; }
+  .opt:hover { background: #fff; transform: translateY(-2px); }
+  .opt.wrong { animation: shake .4s; background: #ffe9ee; }
+  .opt.right { background: linear-gradient(120deg, #f7b6c8, #d9b3ef); border-color: transparent; color: #fff; }
+  @keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+  .hint { min-height: 2.8rem; margin-top: 1rem; color: var(--rose); font-size: .98rem; }
+
+  /* Lớp 3: thẻ cào */
+  .scratch { position: relative; width: min(100%, 22rem); height: 11rem; margin: 1.4rem auto 0; border-radius: 1.6rem; overflow: hidden; box-shadow: 0 20px 44px -26px rgba(185,71,106,.6); }
+  .scratch .under { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.2rem; background: linear-gradient(135deg, #fff5f8, #f3e9fd); font-family: "Playfair Display", serif; font-size: 1.35rem; line-height: 1.4; color: var(--rose); }
+  .scratch canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; transition: opacity .8s; }
+
+  /* Lớp 4: thư */
+  .paper { background: #fff; border-radius: 1.8rem; padding: 2rem 1.6rem; text-align: left; box-shadow: 0 24px 60px -34px rgba(185,71,106,.55); border-top: 6px solid #f2a0b6; min-height: 16rem; }
+  .paper h2 { text-align: center; margin-bottom: .8rem; }
+  .paper p { white-space: pre-line; }
+
+  /* Lớp 5: kết */
+  .bouquet { font-size: clamp(2.2rem, 10vw, 3.4rem); display: flex; justify-content: center; flex-wrap: wrap; gap: .2rem; margin: 1.4rem 0 1rem; }
+  .bouquet span { display: inline-block; transform: scale(0); animation: bloom .7s cubic-bezier(.3,1.5,.5,1) forwards; }
+  @keyframes bloom { to { transform: scale(1); } }
+  .secret { margin-top: 1.6rem; padding: 1.4rem 1.4rem; background: #fff; border-radius: 1.6rem; box-shadow: 0 20px 50px -30px rgba(185,71,106,.6); animation: rise .7s both; }
+  .btn.ghost { background: #fff; color: var(--rose); box-shadow: none; border: 1.5px solid #f2b9c9; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gift, .layer.active, .secret { animation: none; }
+    .bouquet span { animation: none; transform: none; }
+    .opt.wrong { animation: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="dots" id="dots" aria-hidden="true"></div>
+
+<main class="stage">
+
+  <!-- Lớp 1 -->
+  <section class="layer" id="L0">
+    <h1>Có một điều bất ngờ<br>dành cho <span data-name></span></h1>
+    <p class="sub">Bạn chạm vào hộp quà để mở nhé</p>
+    <button class="gift" id="gift" aria-label="Mở hộp quà">🎁</button>
+  </section>
+
+  <!-- Lớp 2 -->
+  <section class="layer" id="L1">
+    <h2><span data-name></span> ơi, đoán thử xem hôm nay là ngày gì nào?</h2>
+    <div class="opts" id="opts"></div>
+    <p class="hint" id="hint" aria-live="polite"></p>
+  </section>
+
+  <!-- Lớp 3 -->
+  <section class="layer" id="L2">
+    <h2>Đúng rồi! Còn một thẻ bí mật nữa</h2>
+    <p class="sub">Dùng ngón tay cào lớp bạc để xem bên trong</p>
+    <div class="scratch">
+      <div class="under" id="under"></div>
+      <canvas id="scratch"></canvas>
+    </div>
+    <button class="btn hidden" id="next2">Tiếp tục</button>
+  </section>
+
+  <!-- Lớp 4 -->
+  <section class="layer" id="L3">
+    <article class="paper">
+      <h2>Thư gửi <span data-name></span> 💌</h2>
+      <p id="letter" aria-live="polite"></p>
+    </article>
+    <button class="btn hidden" id="next3">Còn nữa đó</button>
+  </section>
+
+  <!-- Lớp 5 -->
+  <section class="layer" id="L4">
+    <h1>Chúc mừng ngày<br>Phụ nữ Việt Nam 20/10!</h1>
+    <div class="bouquet" id="bouquet" aria-hidden="true"></div>
+    <p class="sub"><span data-name></span> luôn xinh đẹp, bình an và hạnh phúc nhé 🌸</p>
+    <button class="btn" id="secretBtn">Bấm vào đây, còn một bất ngờ cuối</button>
+    <div class="secret hidden" id="secret"></div>
+    <br>
+    <button class="btn ghost" id="again">Xem lại từ đầu</button>
+  </section>
+
+</main>
+
+<script>
+  /* ====== CHỈNH NỘI DUNG Ở ĐÂY ====== */
+  var CONFIG = {
+    name: "Châu Anh",
+    scratchText: "Bạn xứng đáng được yêu thương mỗi ngày 💗",
+    letter: "Châu Anh ơi, nhân ngày 20/10, mình muốn gửi đến bạn một chút bất ngờ nhỏ.\n\nCảm ơn bạn vì đã là một người tuyệt vời, luôn mang đến năng lượng tốt lành cho những người xung quanh.\n\nMong bạn luôn xinh đẹp, khỏe mạnh, làm được những điều mình thích và được yêu thương thật nhiều.\n\nHôm nay, bạn chỉ cần vui thôi nhé!",
+    secret: "Bất ngờ cuối cùng: dù bận rộn hay mệt mỏi đến đâu, hãy nhớ rằng bạn luôn xứng đáng được nghỉ ngơi và được trân trọng. 💗",
+    quiz: [
+      { t: "Ngày Quốc tế Thiếu nhi 1/6", ok: false, hint: "Tiếc quá, hôm nay không phải ngày đó! Thử lại nhé 😄" },
+      { t: "Ngày Phụ nữ Việt Nam 20/10", ok: true },
+      { t: "Chỉ là một ngày bình thường", ok: false, hint: "Ngày nào có bạn cũng đặc biệt, nhưng hôm nay còn đặc biệt hơn! Thử lại nhé 💗" }
+    ]
+  };
+
+  /* ====== CODE (không cần sửa) ====== */
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var layers = [0,1,2,3,4].map(function (i) { return $("L" + i); });
+  var dotsEl = $("dots"), cur = 0, typeTimer;
+
+  document.querySelectorAll("[data-name]").forEach(function (e) { e.textContent = CONFIG.name; });
+  document.title = "Một bất ngờ nhỏ dành cho " + CONFIG.name + " 🎁";
+  layers.forEach(function () { var d = document.createElement("span"); d.className = "dot"; dotsEl.appendChild(d); });
+
+  function show(n) {
+    cur = n;
+    layers.forEach(function (l, i) { l.classList.toggle("active", i === n); });
+    Array.prototype.forEach.call(dotsEl.children, function (d, i) {
+      d.className = "dot" + (i === n ? " on" : i < n ? " done" : "");
+    });
+    window.scrollTo(0, 0);
+    if (n === 2) initScratch();
+    if (n === 3) typeLetter();
+    if (n === 4) bloom();
+  }
+
+  /* Hoa giấy bay */
+  var cv = $("fx"), cx = cv.getContext("2d"), parts = [], running = false, EMO = ["🌸","💗","✨","🌷","💖","🌼"];
+  function fit() { cv.width = innerWidth; cv.height = innerHeight; }
+  fit(); addEventListener("resize", fit);
+  function burst(x, y, n) {
+    if (reduce) return;
+    for (var i = 0; i < n; i++) parts.push({ x: x, y: y, vx: (Math.random() - .5) * 12, vy: -3 - Math.random() * 10, s: 14 + Math.random() * 14, r: Math.random() * 6, vr: (Math.random() - .5) * .3, e: EMO[Math.floor(Math.random() * EMO.length)] });
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    cx.clearRect(0, 0, cv.width, cv.height);
+    parts = parts.filter(function (p) { return p.y < cv.height + 40; });
+    parts.forEach(function (p) {
+      p.vy += .25; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.font = p.s + "px serif"; cx.fillText(p.e, -p.s / 2, p.s / 2); cx.restore();
+    });
+    if (parts.length) requestAnimationFrame(tick); else running = false;
+  }
+
+  /* Lớp 1: mở quà */
+  $("gift").addEventListener("click", function () {
+    var b = this.getBoundingClientRect();
+    this.classList.add("open");
+    burst(b.left + b.width / 2, b.top + b.height / 2, 40);
+    setTimeout(function () { $("gift").classList.remove("open"); show(1); }, reduce ? 0 : 700);
+  });
+
+  /* Lớp 2: câu hỏi */
+  CONFIG.quiz.forEach(function (q) {
+    var b = document.createElement("button");
+    b.className = "opt"; b.type = "button"; b.textContent = q.t;
+    b.addEventListener("click", function () {
+      if (q.ok) {
+        b.classList.add("right"); $("hint").textContent = "Chính xác! Giỏi quá 🎉";
+        var r = b.getBoundingClientRect(); burst(r.left + r.width / 2, r.top, 50);
+        setTimeout(function () { show(2); }, reduce ? 0 : 1100);
+      } else {
+        b.classList.remove("wrong"); void b.offsetWidth; b.classList.add("wrong");
+        $("hint").textContent = q.hint;
+      }
+    });
+    $("opts").appendChild(b);
+  });
+
+  /* Lớp 3: thẻ cào */
+  var sc = $("scratch"), sx = sc.getContext("2d"), drawing = false, revealed = false, lastCheck = 0;
+  function initScratch() {
+    $("under").textContent = CONFIG.scratchText;
+    revealed = false; sc.style.opacity = 1; sc.style.pointerEvents = "auto"; $("next2").classList.add("hidden");
+    var r = sc.parentNode.getBoundingClientRect(); sc.width = r.width; sc.height = r.height;
+    var g = sx.createLinearGradient(0, 0, sc.width, sc.height);
+    g.addColorStop(0, "#d9d2e6"); g.addColorStop(.5, "#f3eef9"); g.addColorStop(1, "#cfc6df");
+    sx.globalCompositeOperation = "source-over"; sx.fillStyle = g; sx.fillRect(0, 0, sc.width, sc.height);
+    sx.fillStyle = "#8d7aa6"; sx.font = "500 18px 'Be Vietnam Pro', sans-serif"; sx.textAlign = "center";
+    sx.fillText("✨ Cào ở đây nhé ✨", sc.width / 2, sc.height / 2 + 6);
+  }
+  function scratchAt(e) {
+    var r = sc.getBoundingClientRect();
+    sx.globalCompositeOperation = "destination-out";
+    sx.beginPath(); sx.arc(e.clientX - r.left, e.clientY - r.top, 24, 0, 6.3); sx.fill();
+    var now = Date.now(); if (now - lastCheck < 150 || revealed) return; lastCheck = now;
+    var d = sx.getImageData(0, 0, sc.width, sc.height).data, clear = 0, total = 0;
+    for (var i = 3; i < d.length; i += 64) { total++; if (d[i] === 0) clear++; }
+    if (clear / total > .5) finishScratch();
+  }
+  function finishScratch() {
+    revealed = true; sc.style.opacity = 0; sc.style.pointerEvents = "none";
+    var r = sc.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 45);
+    $("next2").classList.remove("hidden");
+  }
+  sc.addEventListener("pointerdown", function (e) { drawing = true; sc.setPointerCapture(e.pointerId); scratchAt(e); });
+  sc.addEventListener("pointermove", function (e) { if (drawing) scratchAt(e); });
+  sc.addEventListener("pointerup", function () { drawing = false; });
+  sc.addEventListener("pointercancel", function () { drawing = false; });
+  $("next2").addEventListener("click", function () { show(3); });
+
+  /* Lớp 4: thư gõ từng chữ */
+  function typeLetter() {
+    var el = $("letter"), i = 0, txt = CONFIG.letter;
+    clearInterval(typeTimer); $("next3").classList.add("hidden"); el.textContent = "";
+    if (reduce) { el.textContent = txt; $("next3").classList.remove("hidden"); return; }
+    typeTimer = setInterval(function () {
+      el.textContent = txt.slice(0, ++i);
+      if (i >= txt.length) { clearInterval(typeTimer); $("next3").classList.remove("hidden"); }
+    }, 38);
+  }
+  $("letter").addEventListener("click", function () {
+    clearInterval(typeTimer); this.textContent = CONFIG.letter; $("next3").classList.remove("hidden");
+  });
+  $("next3").addEventListener("click", function () { show(4); });
+
+  /* Lớp 5: bó hoa và điều bất ngờ cuối */
+  function bloom() {
+    var b = $("bouquet"); b.innerHTML = "";
+    ["🌷","🌸","🌹","🌺","🌼","💐","🌸"].forEach(function (f, i) {
+      var s = document.createElement("span"); s.textContent = f; s.style.animationDelay = (i * .18) + "s"; b.appendChild(s);
+    });
+    $("secret").classList.add("hidden"); $("secretBtn").classList.remove("hidden");
+    setTimeout(function () { burst(innerWidth / 2, innerHeight * .5, 70); }, reduce ? 0 : 300);
+  }
+  $("secretBtn").addEventListener("click", function () {
+    $("secret").textContent = CONFIG.secret; $("secret").classList.remove("hidden"); this.classList.add("hidden");
+    burst(innerWidth * .25, innerHeight * .7, 50); burst(innerWidth * .75, innerHeight * .7, 50);
+  });
+  $("again").addEventListener("click", function () { $("hint").textContent = ""; show(0); });
+
+  show(0);
+</script>
+</body>
+</html>
